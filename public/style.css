@@ -1,0 +1,98 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Add Student Section */
+input[type="text"], input[type="number"] {
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* List of Students */
+#list {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+}
+
+#list li {
+  background-color: #ffffff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+#list li button {
+  background-color: #e74c3c;
+  margin-left: 10px;
+}
+
+#list li button:first-child {
+  background-color: #2980b9;
+}
+
+#list li button:hover {
+  background-color: #da1818;
+}
+
+/* Button Styles */
+button:active {
+  transform: scale(0.98);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  input[type="text"], input[type="number"] {
+      width: 100%;
+  }
+
+  #list li {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  button {
+      width: 100%;
+      margin-top: 10px;
+  }
+}

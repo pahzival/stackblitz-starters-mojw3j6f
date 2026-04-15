@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Students</h1>
+    <button onclick="loadStudents()">Display Students</button>
+    <ul id="list"></ul>
+
+    <h1>ADD STUDENT</h1>
+    <input type="text" id="name" name="name" placeholder="name" />
+    <input type="number" id="yearLevel" name="yearLevel" placeholder="yearLevel" />
+    <button onclick="addStudent()">Submit</button>
+
+    <script>
+        // Load all students
+        async function loadStudents() {
+            const res = await fetch('http://localhost:3000/api/students')
+            const data = await res.json()
+
+            const list = document.getElementById('list')
+            list.innerHTML = ''
+
+            data.forEach((student) => {
+                const li = document.createElement('li')
+                li.textContent = `ID: ${student.id} - Name: ${student.name} - Year Level: ${student.yearLevel}`
+
+                // mag-create og Update button
+                const updateButton = document.createElement('button')
+                updateButton.textContent = 'Update'
+                updateButton.onclick = () => updateStudent(student.id)
+
+                // mag-create og Delete button
+                const deleteButton = document.createElement('button')
+                deleteButton.textContent = 'Delete'
+                deleteButton.onclick = () => deleteStudent(student.id)
+
+                li.appendChild(updateButton)
+                li.appendChild(deleteButton)
+
+                list.appendChild(li)
+            })
+        }
+
+        // Add a new student
+        async function addStudent() {
+            const name = document.getElementById('name').value
+            const yearLevel = document.getElementById('yearLevel').value
+
+            if (!name || !yearLevel) {
+                alert('Please provide both name and year level.')
+                return
+            }
+
+            const res = await fetch('http://localhost:3000/api/students', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, yearLevel }),
+            })
+
+            const data = await res.json()
+            console.log(data)
+            loadStudents()
+        }
+
+        // Update a student's details
+        async function updateStudent(id) {
+            const name = prompt('Enter new name:')
+            const yearLevel = prompt('Enter new year level:')
+
+            if (!name || !yearLevel) {
+                alert('Please provide both name and year level.')
+                return
+            }
+
+            const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, yearLevel }),
+            })
+
+            const data = await res.json()
+            console.log(data)
+            loadStudents()
+        }
+
+        // Delete a student
+        async function deleteStudent(id) {
+            const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+                method: 'DELETE',
+            })
+
+            const data = await res.json()
+            console.log(data)
+            loadStudents()
+        }
+    </script>
+</body>
+</html>
+
+<script>
+    async function addStudent(){
+        const name = document.getElementById('name').value
+        const yearLevel = document.getElementById('yearLevel').value
+        const res = await fetch('http://localhost:3000/api/students',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+
+            },
+            body: JSON.stringify({name, yearLevel})
+        }
+        )
+        const data = await res.json()
+        console.log(data)
+        loadStudents()
+    }
+</script>
+</html>
