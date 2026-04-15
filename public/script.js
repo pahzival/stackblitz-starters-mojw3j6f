@@ -1,6 +1,6 @@
 async function loadStudents() {
   try {
-      const res = await fetch('https://stackblitz-starters-mojw3j6f.onrender.com//api/students');
+      const res = await fetch('https://stackblitz-starters-mojw3j6f.onrender.com/api/students');
       const data = await res.json();
 
       const list = document.getElementById('list');
@@ -43,7 +43,7 @@ async function addStudent() {
   }
 
   try {
-      const res = await fetch('https://stackblitz-starters-mojw3j6f.onrender.com//api/students', {
+      const res = await fetch('https://stackblitz-starters-mojw3j6f.onrender.com/api/students', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ async function updateStudent(id) {
   }
 
   try {
-      const res = await fetch(`https://stackblitz-starters-mojw3j6f.onrender.com//api/students/${id}`, {
+      const res = await fetch(`https://stackblitz-starters-mojw3j6f.onrender.com/api/students/${id}`, {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ async function updateStudent(id) {
 async function deleteStudent(id) {
   if (confirm('Are you sure you want to delete this student?')) {
       try {
-          const res = await fetch(`https://stackblitz-starters-mojw3j6f.onrender.com//api/students/${id}`, {
+          const res = await fetch(`https://stackblitz-starters-mojw3j6f.onrender.com/api/students/${id}`, {
               method: 'DELETE',
           });
 
